@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mea | Find Your Size</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+      min-height: 100vh;
+      padding: 1.5rem 1rem;
+    }
+    
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      align-items: stretch;
+    }
+    
+    @media (max-width: 968px) {
+      .container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+    
+    .form-card {
+      background: white;
+      border-radius: 20px;
+      padding: 2.5rem;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+    }
+    
+    .form-title {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #9ca3af;
+      margin-bottom: 1.5rem;
+    }
+    
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    @media (max-width: 640px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    
+    .form-field {
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .form-field label {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: #1f2937;
+      margin-bottom: 0.4rem;
+    }
+    
+    .form-field input,
+    .form-field select {
+      padding: 0.75rem 0.875rem;
+      border: 1px solid #e5e7eb;
+      border-radius: 10px;
+      font-size: 0.875rem;
+      font-family: 'Inter', sans-serif;
+      color: #374151;
+      background: #f9fafb;
+      transition: all 0.2s ease;
+    }
+    
+    .form-field input:focus,
+    .form-field select:focus {
+      outline: none;
+      border-color: #ffb6a3;
+      background: white;
+      box-shadow: 0 0 0 3px rgba(255, 182, 163, 0.1);
+    }
+    
+    .form-field input::placeholder {
+      color: #9ca3af;
+    }
+    
+    .submit-btn {
+      width: 100%;
+      padding: 0.875rem;
+      background: linear-gradient(135deg, #ffb6a3 0%, #ffc1b1 100%);
+      color: #1f2937;
+      font-weight: 600;
+      font-size: 0.9375rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 0.75rem;
+    }
+    
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(255, 182, 163, 0.3);
+    }
+    
+    .guide-card {
+      background: white;
+      border-radius: 20px;
+      padding: 2.5rem;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+      position: sticky;
+      top: 1.5rem;
+      height: fit-content;
+    }
+    
+    .guide-title {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #9ca3af;
+      margin-bottom: 1.5rem;
+    }
+    
+    .guide-image-container {
+      background: #f3f4f6;
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin-bottom: 1.25rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .guide-image {
+      max-width: 100%;
+      height: auto;
+    }
+    
+    .guide-note {
+      background: #fef3f2;
+      border-radius: 10px;
+      padding: 1rem;
+      text-align: center;
+    }
+    
+    .guide-note p {
+      font-size: 0.8125rem;
+      color: #6b7280;
+      line-height: 1.6;
+    }
+
+    /* Thank You Page Styles */
+    .thank-you-container {
+      max-width: 700px;
+      margin: 4rem auto;
+      display: none;
+    }
+
+    .thank-you-container.active {
+      display: block;
+    }
+
+    .thank-you-card {
+      background: white;
+      border-radius: 24px;
+      padding: 4rem 3rem;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+      text-align: center;
+    }
+
+    .thank-you-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.25rem;
+      color: #1f2937;
+      margin-bottom: 2rem;
+      line-height: 1.3;
+    }
+
+    .size-display {
+      color: #6b7280;
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .size-display strong {
+      color: #1f2937;
+      font-weight: 600;
+    }
+
+    .email-note {
+      color: #6b7280;
+      font-size: 1rem;
+      margin: 2rem 0;
+      line-height: 1.6;
+    }
+
+    .size-chart-btn {
+      display: inline-block;
+      padding: 1rem 2.5rem;
+      background: linear-gradient(135deg, #ffb6a3 0%, #ffc1b1 100%);
+      color: #1f2937;
+      font-weight: 600;
+      font-size: 1rem;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      margin-bottom: 3rem;
+    }
+
+    .size-chart-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(255, 182, 163, 0.3);
+    }
+
+    .social-section {
+      background: #f9fafb;
+      border-radius: 16px;
+      padding: 2rem;
+      margin-top: 2rem;
+    }
+
+    .social-title {
+      color: #6b7280;
+      font-size: 0.9375rem;
+      margin-bottom: 1rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+    }
+
+    .social-links a {
+      color: #1f2937;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.9375rem;
+      transition: color 0.2s;
+    }
+
+    .social-links a:hover {
+      color: #ffb6a3;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="form-container">
+    <!-- Left Side: Measurement Form -->
+    <div class="form-card">
+      <p class="form-title">Measurements</p>
+      
+      <form id="measurement-form">
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="bust">Bust (inches)</label>
+            <input id="bust" name="bust" type="number" min="20" max="80" step="0.25" required placeholder="e.g. 35.5">
+          </div>
+          
+          <div class="form-field">
+            <label for="naturalWaist">Natural Waist (inches)</label>
+            <input id="naturalWaist" name="naturalWaist" type="number" min="20" max="80" step="0.25" required placeholder="e.g. 28.5">
+          </div>
+          
+          <div class="form-field">
+            <label for="pantWaist">Pant Waist (Mid Rise) (inches)</label>
+            <input id="pantWaist" name="pantWaist" type="number" min="20" max="80" step="0.25" required placeholder="e.g. 30">
+          </div>
+          
+          <div class="form-field">
+            <label for="hip">Hip (inches)</label>
+            <input id="hip" name="hip" type="number" min="20" max="90" step="0.25" required placeholder="e.g. 38">
+          </div>
+          
+          <div class="form-field">
+            <label for="thigh">Thigh (inches)</label>
+            <input id="thigh" name="thigh" type="number" min="15" max="40" step="0.25" required placeholder="e.g. 22">
+          </div>
+        </div>
+        
+        <div class="form-grid">
+          <div class="form-field">
+            <label for="jacketLength">Jacket Length Preference</label>
+            <select id="jacketLength" name="jacketLength" required>
+              <option value="" disabled selected>Select option</option>
+              <option>Extra Long</option>
+              <option>Long</option>
+              <option>Regular</option>
+              <option>Short</option>
+              <option>Extra Short</option>
+            </select>
+          </div>
+          
+          <div class="form-field">
+            <label for="jacketWidth">Jacket Width Preference</label>
+            <select id="jacketWidth" name="jacketWidth" required>
+              <option value="" disabled selected>Select option</option>
+              <option>Extra Loose</option>
+              <option>Loose</option>
+              <option>Regular</option>
+              <option>Slim</option>
+              <option>Extra Slim</option>
+            </select>
+          </div>
+          
+          <div class="form-field">
+            <label for="pantsLength">Pants Length Preference</label>
+            <select id="pantsLength" name="pantsLength" required>
+              <option value="" disabled selected>Select option</option>
+              <option>Extra Long</option>
+              <option>Long</option>
+              <option>Regular</option>
+              <option>Short</option>
+              <option>Extra Short</option>
+            </select>
+          </div>
+          
+          <div class="form-field">
+            <label for="pantsWidth">Pants Width Preference</label>
+            <select id="pantsWidth" name="pantsWidth" required>
+              <option value="" disabled selected>Select option</option>
+              <option>Extra Loose</option>
+              <option>Loose</option>
+              <option>Regular</option>
+              <option>Slim</option>
+              <option>Extra Slim</option>
+            </select>
+          </div>
+        </div>
+        
+        <button type="submit" class="submit-btn">Get My Measurements</button>
+      </form>
+    </div>
+    
+    <!-- Right Side: Measurement Guide -->
+    <div class="guide-card">
+      <p class="guide-title">Measurement Guide</p>
+      
+      <div class="guide-image-container">
+        <img src="measurement guide.png" alt="Measurement guide showing where to measure" class="guide-image">
+      </div>
+      
+      <div class="guide-note">
+        <p>Round to the nearest quarter inch—we'll take care of the rest.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Thank You Page -->
+  <div class="thank-you-container" id="thank-you-page">
+    <div class="thank-you-card">
+      <h1 class="thank-you-title">Thanks for entering your size details.</h1>
+      
+      <p class="size-display">Here is your jacket and pant size: <strong id="jacket-size-display"></strong></p>
+      <p class="size-display">and <strong id="pant-size-display"></strong>.</p>
+      
+      <p class="email-note">We just sent you an email with these sizes. Save that email for when our sale drops!</p>
+      
+      <a href="index.html#sizeChartModal" class="size-chart-btn">View Size Chart</a>
+      <a href="index.html" class="size-chart-btn" style="background: white; color: #1f2937; border: 2px solid #e5e7eb; margin-left: 1rem;">Go Back to Home</a>
+      
+      <div class="social-section">
+        <p class="social-title">Follow Mea for launch updates:</p>
+        <div class="social-links">
+          <a href="#" target="_blank">Instagram</a>
+          <a href="#" target="_blank">LinkedIn</a>
+          <a href="#" target="_blank">TikTok</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Load lead data from previous page
+    const leadData = JSON.parse(localStorage.getItem('leadData') || '{}');
+    console.log('Lead data from previous page:', leadData);
+
+    // Handle measurement form submission
+    document.getElementById('measurement-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const formData = new FormData(e.target);
+      
+      // Prepare data matching Google Sheets headers exactly
+      const measurementData = {
+        timestamp: new Date().toISOString(),
+        name: leadData.name || '',
+        phone: leadData.phone || '',
+        email: leadData.email || '',
+        bust: formData.get('bust'),
+        naturalWaist: formData.get('naturalWaist'),
+        pantWaist: formData.get('pantWaist'),
+        hip: formData.get('hip'),
+        thigh: formData.get('thigh'),
+        jacketLength: formData.get('jacketLength'),
+        jacketWidth: formData.get('jacketWidth'),
+        pantsLength: formData.get('pantsLength'),
+        pantsWidth: formData.get('pantsWidth')
+      };
+      
+      console.log('Submitting complete data to Google Sheets:', measurementData);
+      
+      // Send to Google Apps Script
+      fetch('https://script.google.com/macros/s/AKfycbyQmqXOGF8oXiKLpEDzB614Ith-edQofNSbJ3uKdRxJtZZiBlAN_d8YjIqQIvEplhId/exec', {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(measurementData)
+      }).catch(err => console.log('Fetch error:', err));
+      
+      // Store complete data
+      localStorage.setItem('measurementData', JSON.stringify(measurementData));
+      
+      // Calculate and display sizes
+      const jacketSize = calculateJacketSize(measurementData);
+      const pantSize = calculatePantSize(measurementData);
+      
+      // Hide form, show thank you page
+      document.getElementById('form-container').style.display = 'none';
+      const thankYouPage = document.getElementById('thank-you-page');
+      thankYouPage.classList.add('active');
+      
+      // Display sizes
+      document.getElementById('jacket-size-display').textContent = jacketSize;
+      document.getElementById('pant-size-display').textContent = pantSize;
+    });
+
+    // Size calculation functions
+    function calculateJacketSize(data) {
+      const bust = parseFloat(data.bust);
+      let baseSize = Math.round(bust / 2) * 2; // Round to nearest even number
+      return `${baseSize} ${data.jacketLength}, ${data.jacketWidth}`;
+    }
+
+    function calculatePantSize(data) {
+      const waist = parseFloat(data.pantWaist);
+      let baseSize = Math.round(waist / 2) * 2; // Round to nearest even number
+      return `${baseSize} ${data.pantsLength}, ${data.pantsWidth}`;
+    }
+  </script>
+</body>
+</html>
