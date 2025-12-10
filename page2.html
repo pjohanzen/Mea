@@ -395,6 +395,12 @@
     // Load lead data from previous page
     const leadData = JSON.parse(localStorage.getItem('leadData') || '{}');
     console.log('Lead data from previous page:', leadData);
+    
+    // Check if email exists
+    if (!leadData.email) {
+      alert('Error: No email found from contact form. Please go back and fill out the contact form first.');
+      console.error('No email in localStorage - user may have skipped contact form');
+    }
 
     // Handle measurement form submission
     document.getElementById('measurement-form').addEventListener('submit', function(e) {
@@ -420,9 +426,16 @@
       };
       
       console.log('Submitting complete data to Google Sheets:', measurementData);
+      console.log('Email being sent:', measurementData.email);
+      
+      // Validate email exists
+      if (!measurementData.email) {
+        alert('Error: Email is missing. Please go back and complete the contact form first.');
+        return;
+      }
       
       // Send to Google Apps Script using FormData
-      const scriptUrl = 'https://script.google.com/macros/s/AKfycbx67tmQF8b2qXV_gI1sQEY5HVvDQdyoD11v2ipY5Dyd_ASl0CspHhcr00JSRmcMW6Lj/exec';
+      const scriptUrl = 'https://script.google.com/macros/s/AKfycbw382oGnRjeS7J0McnsUTeVBwkTAS32ic1DVSgM_yVJnHhOtAgn0PzIdlLJMKxcG9A/exec';
       const formDataToSend = new FormData();
       formDataToSend.append('email', measurementData.email);
       formDataToSend.append('bust', measurementData.bust);
@@ -435,12 +448,36 @@
       formDataToSend.append('pantsLengthPreference', measurementData.pantsLength);
       formDataToSend.append('pantsWidthPreference', measurementData.pantsWidth);
       
+      console.log('FormData being sent - check console');
+      // Log all FormData entries for debugging
+      for (let pair of formDataToSend.entries()) {
+        console.log(pair[0] + ': ' + pair[1]);
+      }
+      
       fetch(scriptUrl, {
         method: 'POST',
         body: formDataToSend
-      }).then(() => {
-        console.log('Measurement data sent to Google Sheets');
-      }).catch(err => console.log('Fetch error:', err));
+      })
+      .then(response => response.text())
+      .then(result => {
+        console.log('Server response:', result);
+        try {
+          const jsonResponse = JSON.parse(result);
+          if (jsonResponse.status === 'error') {
+            console.error('Google Sheets Error:', jsonResponse.message);
+            alert('Note: There was an issue saving your data to our sheet, but your sizes are calculated below. Error: ' + jsonResponse.message);
+          } else {
+            console.log('Measurement data sent to Google Sheets successfully');
+          }
+        } catch (e) {
+          console.warn('Could not parse response as JSON', e);
+          console.log('Measurement data sent to Google Sheets (response not JSON)');
+        }
+      })
+      .catch(err => {
+        console.error('Fetch error:', err);
+        alert('Error submitting form. Please try again.');
+      });
       
       // Store complete data
       localStorage.setItem('measurementData', JSON.stringify(measurementData));
