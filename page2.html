@@ -421,12 +421,25 @@
       
       console.log('Submitting complete data to Google Sheets:', measurementData);
       
-      // Send to Google Apps Script
-      fetch('https://script.google.com/macros/s/AKfycbyQmqXOGF8oXiKLpEDzB614Ith-edQofNSbJ3uKdRxJtZZiBlAN_d8YjIqQIvEplhId/exec', {
+      // Send to Google Apps Script using FormData
+      const scriptUrl = 'https://script.google.com/macros/s/AKfycbx67tmQF8b2qXV_gI1sQEY5HVvDQdyoD11v2ipY5Dyd_ASl0CspHhcr00JSRmcMW6Lj/exec';
+      const formDataToSend = new FormData();
+      formDataToSend.append('email', measurementData.email);
+      formDataToSend.append('bust', measurementData.bust);
+      formDataToSend.append('naturalWaist', measurementData.naturalWaist);
+      formDataToSend.append('pantWaist', measurementData.pantWaist);
+      formDataToSend.append('hip', measurementData.hip);
+      formDataToSend.append('thigh', measurementData.thigh);
+      formDataToSend.append('jacketLengthPreference', measurementData.jacketLength);
+      formDataToSend.append('jacketWidthPreference', measurementData.jacketWidth);
+      formDataToSend.append('pantsLengthPreference', measurementData.pantsLength);
+      formDataToSend.append('pantsWidthPreference', measurementData.pantsWidth);
+      
+      fetch(scriptUrl, {
         method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(measurementData)
+        body: formDataToSend
+      }).then(() => {
+        console.log('Measurement data sent to Google Sheets');
       }).catch(err => console.log('Fetch error:', err));
       
       // Store complete data

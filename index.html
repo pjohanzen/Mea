@@ -379,7 +379,7 @@
         <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32">
             <div class="max-w-2xl mx-auto space-y-8 text-center">
                 <h1 data-aos="fade-up" data-aos-delay="200" class="serif text-5xl md:text-6xl lg:text-7xl leading-tight" style="color: white;">The Only Suit For Female Funeral Directors</h1>
-                <p data-aos="fade-up" data-aos-delay="250" class="serif text-2xl md:text-3xl lg:text-4xl leading-tight" style="color: white;">Real Pockets, Durable, Stretch Material, Custom Sizing</p>
+                <p data-aos="fade-up" data-aos-delay="250" class="serif text-2xl md:text-3xl lg:text-4xl leading-tight" style="color: white;">Real Pockets, Durable Stretch Material, Custom Sizing</p>
                 <div data-aos="fade-up" data-aos-delay="400" class="pt-8">
                     <a href="#schedule" class="inline-flex items-center px-10 py-3 border border-mea-peach text-mea-peach hover:bg-mea-peach hover:text-white transition-all duration-300 text-xs font-light tracking-widest uppercase">
                         JOIN THE WAITLIST
@@ -413,7 +413,6 @@
                     <p class="text-lg md:text-xl text-mea-dark-gray leading-relaxed font-light">Mea exists to create a suit that female funeral directors love to wear.</p>
                     <p class="text-lg md:text-xl text-mea-dark-gray leading-relaxed font-light">Our suits meet the demands of funeral service and make you look your best.</p>
                     <p class="text-lg md:text-xl text-mea-dark-gray leading-relaxed font-light">Our goal is to give you a suit that the men will be jealous of.</p>
-                    <p class="text-lg md:text-xl text-mea-dark-gray leading-relaxed font-light">Brandon</p>
                     <div class="mt-8 flex items-center justify-center w-full text-center">
                     </div>
                 </div>
@@ -533,7 +532,7 @@
                     <div class="w-16 h-16 flex items-center justify-center rounded-full bg-mea-peach-light text-mea-peach text-2xl mb-5 shadow-none">
                         <i class="fas fa-user-check"></i>
                     </div>
-                    <div class="font-semibold text-mea-black text-base md:text-lg mb-2">Profile Saved</div>
+                    <div class="font-semibold text-mea-black text-base md:text-lg mb-2">Custom Size</div>
                     <div class="text-mea-dark-gray text-sm md:text-base font-light max-w-[18rem]">We adjust your measurement profile so your next suit fits even better!</div>
                 </div>
             </div>
@@ -558,8 +557,8 @@
                     <h2 class="serif text-3xl md:text-4xl mb-4 text-mea-black">Early Entry: Launch Giveaway</h2>
                     <p class="text-base md:text-lg text-mea-dark-gray">Get early access to our giveaway and reserve a pre-sale slot for our launch! Giveaway launches in January 2026 and you'll be able to earn extra entries then.</p>
                 </div>
-                <div class="grid md:grid-cols-2 gap-8">
-                    <form id="lead-form" class="bg-mea-peach-light rounded-2xl p-8 shadow-premium">
+                <div class="grid md:grid-cols-2 gap-8 md:items-stretch">
+                    <form id="lead-form" class="bg-mea-peach-light rounded-2xl p-8 shadow-premium flex flex-col h-full">
                         <div class="mb-6">
                             <label for="name" class="block text-sm font-semibold mb-2 text-mea-black">Name</label>
                             <input id="name" name="name" type="text" required placeholder="Full name" class="w-full border border-mea-gray rounded px-4 py-3 focus:outline-none focus:border-mea-peach">
@@ -572,13 +571,14 @@
                             <label for="email" class="block text-sm font-semibold mb-2 text-mea-black">Email</label>
                             <input id="email" name="email" type="email" required placeholder="you@example.com" class="w-full border border-mea-gray rounded px-4 py-3 focus:outline-none focus:border-mea-peach">
                         </div>
+                        <div class="flex-grow"></div>
                         <button type="submit" class="w-full bg-mea-peach text-white px-6 py-3 rounded-lg hover:bg-[#ff9770] transition text-base font-semibold">Save My Entry</button>
                         <p class="mt-4 text-sm text-center text-mea-dark-gray" id="lead-status" role="status" aria-live="polite"></p>
                     </form>
-                    <div class="bg-white rounded-2xl p-8 shadow-premium">
+                    <div class="bg-white rounded-2xl p-8 shadow-premium flex flex-col h-full">
                         <p class="text-xs tracking-widest uppercase text-mea-peach mb-4">What to expect</p>
                         <h3 class="text-2xl font-semibold mb-6 text-mea-black">Early access perks</h3>
-                        <ul class="space-y-4 text-mea-dark-gray">
+                        <ul class="space-y-4 text-mea-dark-gray flex-grow">
                             <li class="flex items-start">
                                 <span class="text-mea-peach mr-3 mt-1">✓</span>
                                 <span>First access to earn extra entries in our giveaway (January 2026)</span>
@@ -632,17 +632,31 @@
                     localStorage.setItem('leadData', JSON.stringify(data));
                     console.log('Data saved to localStorage');
                     
-                    // Send to Google Apps Script (async, won't wait for response)
-                    fetch('https://script.google.com/macros/s/AKfycbxfvmHYUSF16TiQjyrN-PKWsXZBo4REKyFcICiO7hDTvOQEiPZdp6IASvNTI1lNx46O/exec', {
-                        method: 'POST',
-                        mode: 'no-cors',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(data)
-                    }).catch(err => console.log('Fetch error (expected with no-cors):', err));
+                    // Send contact info to Google Apps Script using URLSearchParams
+                    const scriptUrl = 'https://script.google.com/macros/s/AKfycbx67tmQF8b2qXV_gI1sQEY5HVvDQdyoD11v2ipY5Dyd_ASl0CspHhcr00JSRmcMW6Lj/exec';
                     
-                    // Redirect immediately
-                    console.log('Redirecting now...');
-                    window.location.href = 'page2.html';
+                    // Create form data
+                    const formDataToSend = new FormData();
+                    formDataToSend.append('name', data.name);
+                    formDataToSend.append('phone', data.phone);
+                    formDataToSend.append('email', data.email);
+                    formDataToSend.append('timestamp', data.timestamp);
+                    
+                    // Send via fetch
+                    fetch(scriptUrl, {
+                        method: 'POST',
+                        body: formDataToSend
+                    }).then(() => {
+                        console.log('Data sent to Google Sheets');
+                    }).catch(err => {
+                        console.log('Fetch error:', err);
+                    });
+                    
+                    // Redirect to measurement form after a brief delay
+                    setTimeout(() => {
+                        console.log('Redirecting to page 2 for measurements...');
+                        window.location.href = 'page2.html';
+                    }, 500);
                 });
                 
                 console.log('Lead form listener attached successfully');
@@ -1477,7 +1491,7 @@
                     };
 
                     // Send to Google Apps Script
-                    fetch('https://script.google.com/macros/s/AKfycbyQmqXOGF8oXiKLpEDzB614Ith-edQofNSbJ3uKdRxJtZZiBlAN_d8YjIqQIvEplhId/exec', {
+                    fetch('https://script.google.com/macros/s/AKfycbxMJieacCFqFGH4IQUPFWpSvF8J4IL3nS_9jXLWUb9aGoZt6mpKv8-uSz7R6JftVV7e/exec', {
                         method: 'POST',
                         mode: 'no-cors',
                         headers: {
@@ -1529,7 +1543,7 @@
                     localStorage.setItem('leadData', JSON.stringify(data));
 
                     // Send to Google Apps Script (fire and forget due to no-cors)
-                    fetch('https://script.google.com/macros/s/AKfycbyQmqXOGF8oXiKLpEDzB614Ith-edQofNSbJ3uKdRxJtZZiBlAN_d8YjIqQIvEplhId/exec', {
+                    fetch('https://script.google.com/macros/s/AKfycbxMJieacCFqFGH4IQUPFWpSvF8J4IL3nS_9jXLWUb9aGoZt6mpKv8-uSz7R6JftVV7e/exec', {
                         method: 'POST',
                         mode: 'no-cors',
                         headers: {
