@@ -1,5 +1,14 @@
 <html>
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3RC0H9GB29"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-3RC0H9GB29');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mea | Tailored Women's Suiting for Funeral Professionals</title>
@@ -456,7 +465,7 @@
                 <div class="flex-1 flex flex-col items-center md:items-start w-full md:w-2/3 md:pl-12">
                     <div id="benefitsContentArea" class="flex-1 flex flex-col items-center md:items-start w-full">
                         <div id="customFitDesc" class="text-mea-dark-gray text-base font-light mt-8 mb-12 max-w-2xl mx-auto md:mx-0 text-center md:text-left fade show">
-                        Get your first suit in a 'modified' standard size. Provide feedback to build your custom size.
+                        Get your first suit in a modified standard size. Provide feedback to build your custom size.
                     </div>
                         <div id="realPocketsDesc" class="text-mea-dark-gray text-base font-light mt-8 mb-12 max-w-2xl mx-auto md:mx-0 text-center md:text-left hidden fade">
                         We include real pockets inside and outside your suit jacket + on pants/skirts, so you don't have to carry a bag on the go.
@@ -543,7 +552,7 @@
     <section id="preorder" class="py-28 md:py-36 bg-mea-peach-light relative border-t border-gray-100" data-aos="fade-up" data-aos-delay="700">
         <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div class="max-w-2xl mx-auto text-center">
-                <p class="text-lg md:text-2xl font-semibold tracking-[.25em] uppercase text-black mb-6">Launching January 2026</p>
+                <p class="text-lg md:text-2xl font-semibold tracking-[.25em] uppercase text-black mb-6">Launching Spring 2026</p>
                 <h2 class="serif text-3xl md:text-4xl mb-6">Pre-register for our launch giveaway below.</h2>
             </div>
         </div>
@@ -555,7 +564,7 @@
             <div class="max-w-4xl mx-auto">
                 <div class="text-center mb-12">
                     <h2 class="serif text-3xl md:text-4xl mb-4 text-mea-black">Early Entry: Launch Giveaway</h2>
-                    <p class="text-base md:text-lg text-mea-dark-gray">Get early access to our giveaway and reserve a pre-sale slot for our launch! Giveaway launches in January 2026 and you'll be able to earn extra entries then.</p>
+                    <p class="text-base md:text-lg text-mea-dark-gray">Get early access to our giveaway and reserve a pre-sale slot for our launch! Giveaway launches in Spring 2026 and you'll be able to earn extra entries then.</p>
                 </div>
                 <div class="grid md:grid-cols-2 gap-8 md:items-stretch">
                     <form id="lead-form" class="bg-mea-peach-light rounded-2xl p-8 shadow-premium flex flex-col h-full">
@@ -565,7 +574,7 @@
                         </div>
                         <div class="mb-6">
                             <label for="phone" class="block text-sm font-semibold mb-2 text-mea-black">Mobile phone</label>
-                            <input id="phone" name="phone" type="tel" required placeholder="+1 900 000 0000" pattern="^[0-9+\\-()\\s]{7,}$" class="w-full border border-mea-gray rounded px-4 py-3 focus:outline-none focus:border-mea-peach">
+                            <input id="phone" name="phone" type="tel" required placeholder="(555) 555-5555" pattern="^[0-9+\\-()\\s]{7,}$" class="w-full border border-mea-gray rounded px-4 py-3 focus:outline-none focus:border-mea-peach">
                         </div>
                         <div class="mb-6">
                             <label for="email" class="block text-sm font-semibold mb-2 text-mea-black">Email</label>
@@ -581,7 +590,7 @@
                         <ul class="space-y-4 text-mea-dark-gray flex-grow">
                             <li class="flex items-start">
                                 <span class="text-mea-peach mr-3 mt-1">✓</span>
-                                <span>First access to earn extra entries in our giveaway (January 2026)</span>
+                                <span>First access to earn extra entries in our giveaway (Spring 2026)</span>
                             </li>
                             <li class="flex items-start">
                                 <span class="text-mea-peach mr-3 mt-1">✓</span>
@@ -633,19 +642,16 @@
                     console.log('Data saved to localStorage');
                     
                     // Send contact info to Google Apps Script using URLSearchParams
-                    const scriptUrl = 'https://script.google.com/macros/s/AKfycbw382oGnRjeS7J0McnsUTeVBwkTAS32ic1DVSgM_yVJnHhOtAgn0PzIdlLJMKxcG9A/exec';
+                    const scriptUrl = 'https://script.google.com/macros/s/AKfycbz9j76TirngGzvBrmGr0y5u4s_AGWGseVSveIZfjB3ag6_tTDgB1F5gdeyL6JXpGVb-/exec';
                     
-                    // Create form data
-                    const formDataToSend = new FormData();
-                    formDataToSend.append('name', data.name);
-                    formDataToSend.append('phone', data.phone);
-                    formDataToSend.append('email', data.email);
-                    formDataToSend.append('timestamp', data.timestamp);
-                    
+                    const params = new URLSearchParams(data);
+                    const targetUrl = scriptUrl + '?' + params.toString();
+
                     // Send via fetch
-                    fetch(scriptUrl, {
+                    fetch(targetUrl, {
                         method: 'POST',
-                        body: formDataToSend
+                        mode: 'no-cors',
+                        keepalive: true
                     }).then(() => {
                         console.log('Data sent to Google Sheets');
                     }).catch(err => {
@@ -655,7 +661,7 @@
                     // Redirect to measurement form after a brief delay
                     setTimeout(() => {
                         console.log('Redirecting to page 2 for measurements...');
-                        window.location.href = 'page2.html';
+                        window.location.href = 'size_finder_tool.html';
                     }, 500);
                 });
                 
@@ -685,6 +691,11 @@
                         <span><strong>Phone:</strong> <a href="tel:8017544336" class="hover:text-mea-peach transition-colors">801 754 4336</a></span>
                     </div>
                     <div class="text-xs text-mea-dark-gray tracking-widest uppercase text-center md:text-left">© 2025 Mea | All rights reserved</div>
+                    <div class="flex gap-4 mt-2 justify-center md:justify-start">
+                        <a href="https://www.linkedin.com/company/measuit" target="_blank" class="text-mea-dark-gray hover:text-mea-peach transition-colors text-xl"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://www.instagram.com/meafdsuit/" target="_blank" class="text-mea-dark-gray hover:text-mea-peach transition-colors text-xl"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.facebook.com/people/Mea/61585207431538/" target="_blank" class="text-mea-dark-gray hover:text-mea-peach transition-colors text-xl"><i class="fab fa-facebook"></i></a>
+                    </div>
                 </div>
                 <div class="w-full md:w-1/2">
                     <h3 class="text-lg font-semibold mb-2">Join our email list for updates.</h3>
@@ -1491,13 +1502,13 @@
                     };
 
                     // Send to Google Apps Script
-                    fetch('https://script.google.com/macros/s/AKfycbxMJieacCFqFGH4IQUPFWpSvF8J4IL3nS_9jXLWUb9aGoZt6mpKv8-uSz7R6JftVV7e/exec', {
+                    const scriptUrl = 'https://script.google.com/macros/s/AKfycbxXF2HBkEZiNoB6-X4JK1N5AEH2biD5cWHeZZtMj7-f8sfY2qSgoO5GdoIX38LRNJY/exec';
+                    const params = new URLSearchParams(data);
+                    const targetUrl = scriptUrl + '?' + params.toString();
+
+                    fetch(targetUrl, {
                         method: 'POST',
-                        mode: 'no-cors',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(data)
+                        mode: 'no-cors'
                     })
                     .then(() => {
                         // Clear the input
@@ -1512,57 +1523,7 @@
                 });
             }
 
-            // Lead capture form handling
-            const leadForm = document.getElementById('lead-form');
-            const leadStatus = document.getElementById('lead-status');
 
-            if (leadForm) {
-                leadForm.addEventListener('submit', function(e) {
-                    e.preventDefault();
-                    
-                    console.log('Form submitted'); // Debug log
-                    
-                    const formData = new FormData(leadForm);
-                    const data = {
-                        type: 'leadCapture',
-                        name: formData.get('name'),
-                        phone: formData.get('phone'),
-                        email: formData.get('email'),
-                        timestamp: new Date().toISOString()
-                    };
-
-                    console.log('Form data:', data); // Debug log
-
-                    // Show loading message
-                    if (leadStatus) {
-                        leadStatus.textContent = 'Saving your entry...';
-                        leadStatus.style.color = '#777777';
-                    }
-
-                    // Store form data in localStorage before sending
-                    localStorage.setItem('leadData', JSON.stringify(data));
-
-                    // Send to Google Apps Script (fire and forget due to no-cors)
-                    fetch('https://script.google.com/macros/s/AKfycbxMJieacCFqFGH4IQUPFWpSvF8J4IL3nS_9jXLWUb9aGoZt6mpKv8-uSz7R6JftVV7e/exec', {
-                        method: 'POST',
-                        mode: 'no-cors',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(data)
-                    }).catch(error => {
-                        console.error('Fetch error:', error);
-                    });
-
-                    // Redirect after a short delay (give fetch a chance to start)
-                    setTimeout(() => {
-                        console.log('Redirecting to page2.html'); // Debug log
-                        window.location.href = 'page2.html';
-                    }, 500);
-                });
-            } else {
-                console.log('Lead form not found'); // Debug log
-            }
         });
         
         // Smooth scroll for anchor links
@@ -1771,8 +1732,20 @@
 
             // Function to send form data to Google Apps Script
             function sendFormDataToGoogleSheet(section) {
-                const data = getAllFormData(section);
-                console.log('Sending data for section', section, ':', JSON.stringify(data, null, 2));
+                const rawData = getAllFormData(section);
+                console.log('Sending data for section', section, ':', JSON.stringify(rawData, null, 2));
+
+                // Flatten data for Google Apps Script to match expected structure
+                const data = {
+                    ...rawData,
+                    name: rawData.contact?.orderName || '',
+                    phone: rawData.contact?.orderPhone || '',
+                    email: rawData.contact?.orderEmail || '',
+                    jacketLengthPreference: rawData.sizes?.jacketLength || '',
+                    jacketWidthPreference: rawData.sizes?.jacketWidth || '',
+                    pantsLengthPreference: rawData.sizes?.pantsLength || '',
+                    pantsWidthPreference: rawData.sizes?.pantsWidth || ''
+                };
 
                 // Show loading state
                 const currentButton = document.querySelector(`#orderNextBtn${section}`);
@@ -1784,20 +1757,17 @@
                 }
 
                 // Ensure the Google Apps Script URL is correct
-                const googleScriptURL = 'https://script.google.com/macros/s/AKfycbyS7djitUJhd2AYIMM-YWlX6cv9xNfNFE0RVdVVFK22X8Bm6Rys5qAuuPJduEGHhSpV/exec';
+                const googleScriptURL = 'https://script.google.com/macros/s/AKfycbxXF2HBkEZiNoB6-X4JK1N5AEH2biD5cWHeZZtMj7-f8sfY2qSgoO5GdoIX38LRNJY/exec';
+                const params = new URLSearchParams(data);
+                const targetUrl = googleScriptURL + '?' + params.toString();
 
-                console.log('Sending data to:', googleScriptURL);
-                console.log('Request payload:', JSON.stringify(data, null, 2));
+                console.log('Sending data to:', targetUrl);
+                console.log('Request payload (params):', params.toString());
 
                 // Send the data using fetch
-                fetch(googleScriptURL, {
+                fetch(targetUrl, {
                     method: 'POST',
-                    mode: 'no-cors',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify(data)
+                    mode: 'no-cors'
                 })
                 .then(function(response) {
                     console.log('Response status:', response.status);
