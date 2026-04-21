@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3RC0H9GB29"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-3RC0H9GB29');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mea | Giveaway</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'serif': ['"DM Serif Display"', 'serif'],
+                        'sans': ['Inter', 'sans-serif']
+                    },
+                    colors: {
+                        'mea-black': '#111111',
+                        'mea-dark-gray': '#777777',
+                        'mea-peach': '#ffb6a3',
+                        'mea-peach-light': '#ffe8e2'
+                    }
+                }
+            }
+        };
+    </script>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fafafa;
+            line-height: 1.6;
+        }
+        
+        /* Hero Section */
+        .giveaway-hero {
+            background: linear-gradient(180deg, #ffffff 0%, rgba(255, 232, 226, 0.3) 100%);
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid rgba(255, 182, 163, 0.1);
+        }
+        
+        .giveaway-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -200px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 182, 163, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+            animation: float 20s ease-in-out infinite;
+        }
+        
+        .giveaway-hero::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 182, 163, 0.05) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 0;
+            animation: float 25s ease-in-out infinite reverse;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(20px); }
+        }
+        
+        .giveaway-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 700px;
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .giveaway-content h1 {
+            font-size: clamp(2.5rem, 8vw, 4rem);
+            font-weight: 400;
+            letter-spacing: -0.01em;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .giveaway-content p {
+            font-size: 17px;
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.7;
+        }
+        
+        /* Prize Cards */
+        .prizes-section {
+            padding: 80px 0;
+            background: linear-gradient(180deg, rgba(255, 182, 163, 0.06) 0%, rgba(255, 193, 177, 0.04) 50%, rgba(255, 182, 163, 0.06) 100%);
+        }
+        
+        .prizes-section h2 {
+            font-size: 2.5rem;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+            text-align: center;
+            margin-bottom: 60px;
+            background: linear-gradient(135deg, #111111 0%, #ffb6a3 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .prize-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(255, 232, 226, 0.3) 100%);
+            border: 1px solid rgba(255, 182, 163, 0.15);
+            border-radius: 12px;
+            padding: 40px 32px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+        
+        .prize-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 182, 163, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .prize-card:hover {
+            border-color: #ffb6a3;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgba(255, 232, 226, 0.5) 100%);
+            box-shadow: 0 12px 48px rgba(255, 182, 163, 0.15);
+            transform: translateY(-8px);
+        }
+        
+        .prize-card:hover::before {
+            left: 100%;
+        }
+        
+        .prize-icon {
+            font-size: 56px;
+            color: white;
+            margin-bottom: 24px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #ffb6a3 0%, #ffc1b1 100%);
+            border-radius: 50%;
+            opacity: 1;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(255, 182, 163, 0.3);
+        }
+        
+        .prize-card:hover .prize-icon {
+            transform: scale(1.08) rotate(5deg);
+            box-shadow: 0 8px 28px rgba(255, 182, 163, 0.4);
+        }
+        
+        .prize-card h3 {
+            font-size: 1.4rem;
+            font-weight: 500;
+            margin-bottom: 12px;
+            letter-spacing: -0.01em;
+        }
+        
+        .prize-card p {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 16px;
+            line-height: 1.6;
+        }
+        
+        .prize-badge {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #ffb6a3;
+            padding: 4px 12px;
+            border: 1px solid rgba(255, 182, 163, 0.2);
+            border-radius: 20px;
+        }
+        
+        /* Form Section */
+        .form-section {
+            padding: 80px 0;
+            background: linear-gradient(180deg, rgba(250, 250, 250, 1) 0%, rgba(255, 232, 226, 0.15) 100%);
+        }
+        
+        .form-section h2 {
+            font-size: 2.5rem;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+            text-align: center;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #111111 0%, #ffb6a3 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .form-subtitle {
+            text-align: center;
+            color: #888;
+            font-size: 15px;
+            margin-bottom: 40px;
+        }
+        
+        .form-wrapper {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(255, 232, 226, 0.2) 100%);
+            border: 1px solid rgba(255, 182, 163, 0.1);
+            border-radius: 12px;
+            padding: 50px;
+            backdrop-filter: blur(5px);
+        }
+        
+        .form-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+            margin-bottom: 24px;
+        }
+        
+        .form-group.full {
+            grid-template-columns: 1fr;
+        }
+        
+        .form-field {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-field label {
+            font-size: 13px;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .form-input,
+        select {
+            border: 1px solid #e8e8e8;
+            border-radius: 6px;
+            padding: 12px 14px;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            background: #fafafa;
+            transition: all 0.25s ease;
+            appearance: none;
+        }
+        
+        .form-input:focus,
+        select:focus {
+            outline: none;
+            background: white;
+            border-color: #ffb6a3;
+            box-shadow: 0 0 0 3px rgba(255, 182, 163, 0.08);
+        }
+        
+        select {
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 8px center;
+            background-size: 20px;
+            padding-right: 32px;
+        }
+        
+        .options-group {
+            display: space-y-3;
+            margin-bottom: 24px;
+        }
+        
+        .option-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .option-item:hover {
+            background: #f9f9f9;
+        }
+        
+        .option-item input {
+            width: 16px;
+            height: 16px;
+            margin-right: 12px;
+            cursor: pointer;
+            accent-color: #ffb6a3;
+        }
+        
+        .option-item label {
+            margin: 0;
+            text-transform: none;
+            font-size: 14px;
+            font-weight: 400;
+            cursor: pointer;
+            letter-spacing: 0;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            padding: 12px;
+            margin-bottom: 24px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+        
+        .checkbox-group:hover {
+            background: #f9f9f9;
+        }
+        
+        .checkbox-group input {
+            width: 16px;
+            height: 16px;
+            margin-right: 12px;
+            margin-top: 2px;
+            cursor: pointer;
+            accent-color: #ffb6a3;
+            flex-shrink: 0;
+        }
+        
+        .checkbox-group label {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.5;
+            cursor: pointer;
+            margin: 0;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #ffb6a3 0%, #ffc1b1 100%);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 14px 40px;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 16px rgba(255, 182, 163, 0.15);
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(255, 182, 163, 0.25);
+        }
+        
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+        
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .success-message {
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            border: 1px solid #86efac;
+            border-radius: 8px;
+            padding: 16px;
+            color: #166534;
+            margin-top: 20px;
+            display: none;
+            animation: slideDown 0.4s ease-out;
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .success-message.show {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .success-message i {
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        
+        .success-content {
+            flex: 1;
+        }
+        
+        .success-content p:first-child {
+            font-weight: 600;
+            margin: 0 0 4px 0;
+        }
+        
+        .success-content p {
+            font-size: 13px;
+            margin: 0;
+        }
+        
+        /* Info Box */
+        .info-section {
+            margin-top: 40px;
+            padding: 24px;
+            background: #fafafa;
+            border-radius: 8px;
+            border-left: 3px solid #ffb6a3;
+        }
+        
+        .info-section .info-title {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            color: #333;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .info-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .info-section li {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 6px;
+            line-height: 1.5;
+        }
+        
+        /* Terms Section */
+        .terms-section {
+            padding: 80px 0;
+            background: linear-gradient(180deg, rgba(255, 232, 226, 0.2) 0%, rgba(255, 182, 163, 0.04) 100%);
+            border-top: 1px solid rgba(255, 182, 163, 0.1);
+        }
+        
+        .terms-section h3 {
+            font-size: 1.8rem;
+            font-weight: 400;
+            letter-spacing: -0.01em;
+            margin-bottom: 32px;
+            background: linear-gradient(135deg, #111111 0%, #ffb6a3 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .terms-section p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .terms-section strong {
+            color: #333;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body class="bg-white text-mea-black font-sans">
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-white/95 z-50 border-b border-gray-100 backdrop-blur-sm">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20">
+                <div class="flex items-center">
+                    <a href="https://mea-649.myshopify.com/"><img src="logo.png" alt="Mea" class="h-20 w-auto"></a>
+                </div>
+                <div class="flex items-center gap-5">
+                    <a id="ordersLink" href="https://mea-649.myshopify.com/account/orders" class="hidden sm:inline-flex items-center text-[11px] font-light tracking-[.2em] uppercase text-mea-dark-gray hover:text-mea-peach transition-colors">Orders</a>
+                    <a id="profileLink" href="https://mea-649.myshopify.com/pages/my-size" class="hidden sm:inline-flex items-center text-[11px] font-light tracking-[.2em] uppercase text-mea-dark-gray hover:text-mea-peach transition-colors">My Size</a>
+                    <a href="https://mea-649.myshopify.com/pages/giveaway" class="hidden sm:inline-flex items-center text-[11px] font-semibold tracking-[.2em] uppercase text-mea-peach transition-colors">Giveaway</a>
+                    <a id="accountLink" href="https://mea-649.myshopify.com/account" class="hidden sm:inline-flex items-center text-[11px] font-light tracking-[.2em] uppercase text-mea-dark-gray hover:text-mea-peach transition-colors">LOGIN</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-20">
+        <!-- Hero Section -->
+        <div class="giveaway-hero">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 giveaway-content">
+                <p class="text-[11px] font-medium tracking-[.25em] uppercase text-mea-peach mb-6">Exclusive Opportunity</p>
+                <h1 class="font-serif text-mea-black">Win Premium Tailored Suiting</h1>
+                <p>Enter for a chance to win a complete ensemble of professionally tailored pieces, curated specifically for you by the Mea design team.</p>
+            </div>
+        </div>
+
+        <!-- Prize Information -->
+        <section class="prizes-section">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="font-serif">What You Can Win</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="prize-card">
+                        <div class="prize-icon">
+                            <i class="fas fa-vest"></i>
+                        </div>
+                        <h3>Custom Blazer</h3>
+                        <p>Tailored jacket in your choice of color and fit, valued at $500+</p>
+                        <span class="prize-badge">Primary Prize</span>
+                    </div>
+
+                    <div class="prize-card">
+                        <div class="prize-icon">
+                            <i class="fas fa-ruler"></i>
+                        </div>
+                        <h3>Tailored Pants</h3>
+                        <p>Perfect fitting trousers customized to your measurements, valued at $250+</p>
+                        <span class="prize-badge">Secondary Prize</span>
+                    </div>
+
+                    <div class="prize-card">
+                        <div class="prize-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h3>Styling Session</h3>
+                        <p>Personal consultation with our style experts and design team, valued at $150+</p>
+                        <span class="prize-badge">Exclusive Benefit</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Entry Form Section -->
+        <section class="form-section">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h2 class="font-serif">Enter the Giveaway</h2>
+                <p class="form-subtitle">One entry per person. Winner selected May 1st, 2026.</p>
+
+                <div class="form-wrapper">
+                    <form id="giveawayForm" class="space-y-0">
+                        <!-- Name Fields -->
+                        <div class="form-group">
+                            <div class="form-field">
+                                <label>First Name <span style="color: #ffb6a3;">*</span></label>
+                                <input type="text" id="firstName" name="firstName" required placeholder="First name" class="form-input" />
+                            </div>
+                            <div class="form-field">
+                                <label>Last Name <span style="color: #ffb6a3;">*</span></label>
+                                <input type="text" id="lastName" name="lastName" required placeholder="Last name" class="form-input" />
+                            </div>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="form-group full">
+                            <div class="form-field">
+                                <label>Email Address <span style="color: #ffb6a3;">*</span></label>
+                                <input type="email" id="email" name="email" required placeholder="your@email.com" class="form-input" />
+                            </div>
+                        </div>
+
+                        <!-- Phone -->
+                        <div class="form-group full">
+                            <div class="form-field">
+                                <label>Phone Number (Optional)</label>
+                                <input type="tel" id="phone" name="phone" placeholder="+1 (555) 000-0000" class="form-input" />
+                            </div>
+                        </div>
+
+                        <!-- Location -->
+                        <div class="form-group">
+                            <div class="form-field">
+                                <label>City <span style="color: #ffb6a3;">*</span></label>
+                                <input type="text" id="city" name="city" required placeholder="City" class="form-input" />
+                            </div>
+                            <div class="form-field">
+                                <label>State <span style="color: #ffb6a3;">*</span></label>
+                                <input type="text" id="state" name="state" required placeholder="State" class="form-input" />
+                            </div>
+                        </div>
+
+                        <!-- How did you hear -->
+                        <div class="form-group full">
+                            <div class="form-field">
+                                <label>Where Did You Hear About Mea? <span style="color: #ffb6a3;">*</span></label>
+                                <select id="source" name="source" required class="form-input">
+                                    <option value="">Select an option</option>
+                                    <option value="social">Social Media</option>
+                                    <option value="friend">Friend or Referral</option>
+                                    <option value="website">Mea Website</option>
+                                    <option value="instagram">Instagram</option>
+                                    <option value="search">Search Engine</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Style Preference -->
+                        <div style="margin-bottom: 24px;">
+                            <label style="font-size: 13px; font-weight: 500; letter-spacing: 0.02em; text-transform: uppercase; color: #333; display: block; margin-bottom: 16px;">
+                                Preferred Style <span style="color: #ffb6a3;">*</span>
+                            </label>
+                            <div class="options-group">
+                                <div class="option-item">
+                                    <input type="radio" id="style1" name="interest" value="blazer" required />
+                                    <label for="style1">Classic Tailored Blazer</label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="radio" id="style2" name="interest" value="twoPiece" required />
+                                    <label for="style2">Two-Piece Suit</label>
+                                </div>
+                                <div class="option-item">
+                                    <input type="radio" id="style3" name="interest" value="modernFit" required />
+                                    <label for="style3">Modern Professional Fit</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Consent -->
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="terms" name="terms" required />
+                            <label for="terms">I agree to receive updates and promotions from Mea and understand I can unsubscribe anytime. I also grant Mea permission to use my information for contest purposes. <span style="color: #ffb6a3;">*</span></label>
+                        </div>
+
+                        <button type="submit" class="btn-primary">
+                            <i class="fas fa-arrow-right"></i> Submit Entry
+                        </button>
+
+                        <div id="successMessage" class="success-message">
+                            <i class="fas fa-check-circle"></i>
+                            <div class="success-content">
+                                <p>Thank you for entering!</p>
+                                <p>We've received your entry. Good luck! 🎉</p>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="info-section">
+                        <div class="info-title">
+                            <i class="fas fa-info-circle"></i> Contest Details
+                        </div>
+                        <ul>
+                            <li><strong>Entry Period:</strong> Now through April 30, 2026</li>
+                            <li><strong>Winner Announcement:</strong> May 1, 2026</li>
+                            <li><strong>Eligibility:</strong> Open to US residents, 18+</li>
+                            <li><strong>Entries:</strong> One per email address</li>
+                            <li><strong>Prize:</strong> Non-transferable, non-refundable</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Terms Section -->
+        <section class="terms-section">
+            <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+                <h3 class="font-serif">Terms & Conditions</h3>
+                <div>
+                    <p>
+                        <strong>No Purchase Necessary:</strong> Void where prohibited. Winners selected randomly from all eligible entries. By entering, you agree to receive promotional communications and grant Mea permission to use your information for contest administration and marketing purposes.
+                    </p>
+                    <p>
+                        <strong>Winner Selection:</strong> The winner will be notified via email on May 1, 2026, and must respond within 7 days to claim their prize. Failure to respond will result in forfeiture.
+                    </p>
+                    <p>
+                        <strong>Prize Details:</strong> Complete prize package includes a custom tailored piece ($500+), tailored pants ($250+), and a styling consultation ($150+). Customization typically requires 4-6 weeks after prize claim.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const form = document.getElementById('giveawayForm');
+        const successMessage = document.getElementById('successMessage');
+
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            // Collect form data
+            const formData = {
+                firstName: document.getElementById('firstName').value,
+                lastName: document.getElementById('lastName').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                city: document.getElementById('city').value,
+                state: document.getElementById('state').value,
+                source: document.getElementById('source').value,
+                interest: document.querySelector('input[name="interest"]:checked').value,
+                timestamp: new Date().toISOString(),
+                userAgent: navigator.userAgent
+            };
+
+            // Save to localStorage for reference
+            const entries = JSON.parse(localStorage.getItem('giveawayEntries') || '[]');
+            entries.push(formData);
+            localStorage.setItem('giveawayEntries', JSON.stringify(entries));
+
+            // Display success message
+            successMessage.classList.add('show');
+
+            // Reset form
+            form.reset();
+
+            // Hide success message after 5 seconds
+            setTimeout(() => {
+                successMessage.classList.remove('show');
+            }, 5000);
+
+            // Optional: Send to external service (like Shopify REST API or a Google Sheet)
+            // You can integrate this with your backend
+            console.log('Giveaway entry submitted:', formData);
+        });
+    </script>
+</body>
+</html>
